@@ -3,6 +3,6 @@ import transactionController from "./controllers/transactionController.js";
 
 const route = express.Router();
 
-route.use("/transaction", transactionController);
+route.use("/transactions", transactionController);
 
 export default route;
