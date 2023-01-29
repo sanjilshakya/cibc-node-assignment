@@ -1,25 +1,24 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
 import mainRouter from "./routes.js";
+import configs from "./config.js"
 
 const app = express();
 app.use(express.json());
 app.use(cors());
-dotenv.config();
 
 app.use("/api", mainRouter);
 
-const PORT = process.env.PORT || 6001;
+const { PORT, DB_USERNAME, DB_PASSWORD } = configs
 
-mongoose
-  .connect(process.env.MONGO_URL, {
+mongoose.connect(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.ogcbhfp.mongodb.net/?retryWrites=true&w=majority`,
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
+    console.log('Database connected');
     app.listen(PORT, () => {
       console.log(`Server started on port ${PORT}.`);
     });
