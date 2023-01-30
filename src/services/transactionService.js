@@ -10,8 +10,12 @@ const transactionService = (() => {
       page = +page
       const skip = ((page ?? 1) - 1) * limit
       const sortQuery = { [sortBy || 'date']: sortType === 'asc' ? 1 : -1 }
-      const condition = { date: { $gte: startDate, $lte: endDate } }
-      const transactions = await Transaction.find(startDate && endDate ? condition : {}).sort(sortQuery).skip(skip)
+      const condition = {
+        date: { $gte: startDate, $lte: endDate },
+        status: { $in: ['IN-PROGRESS', 'COMPLETED', 'PENDING'] }
+      }
+      !(startDate || endDate) && delete condition.date
+      const transactions = await Transaction.find(condition).sort(sortQuery).skip(skip)
       const mappedTransaction = transactions.map((transaction) => {
         transaction = transaction.toJSON()
         transaction.date = +transaction.date
