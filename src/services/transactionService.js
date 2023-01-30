@@ -15,7 +15,12 @@ const transactionService = (() => {
         status: { $in: ['IN-PROGRESS', 'COMPLETED', 'PENDING'] }
       }
       !(startDate || endDate) && delete condition.date
-      const transactions = await Transaction.find(condition).sort(sortQuery).skip(skip)
+
+      const transactions = await Transaction.find(condition)
+        .select('id date Comments status')
+        .sort(sortQuery)
+        .skip(skip)
+
       const mappedTransaction = transactions.map((transaction) => {
         transaction = transaction.toJSON()
         transaction.date = +transaction.date
