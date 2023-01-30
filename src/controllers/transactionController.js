@@ -5,16 +5,11 @@ import httpHelper from "../utils/httpHelper.js";
 const route = express.Router();
 
 route.get("/", (req, res) => {
-  try {
-    transactionService
-      .getTrasaction(req.query)
-      .then((result) => {
-        httpHelper.success(res, result);
-      })
-      .catch((err) => httpHelper.error(res, err));
-  } catch (e) {
-    httpHelper.error(res, e);
-  }
+  transactionService.getTransactions(req.query)
+    .then((result) => {
+      httpHelper.success(res, result);
+    })
+    .catch((err) => httpHelper.error(res, err));
 });
 
 route.get('/:id', async (req, res) => {
