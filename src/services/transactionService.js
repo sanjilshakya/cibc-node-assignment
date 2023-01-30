@@ -31,7 +31,7 @@ const transactionService = (() => {
   }
 
   const getTrasactionById = async (_id) => {
-    let transaction = await Transaction.findById({ _id }).select("id date Comments");
+    let transaction = await Transaction.findById({ _id }).select("id date Comments sender recipient status");
     transaction = transaction.toJSON();
     transaction.date = +transaction.date;
     return transaction;
