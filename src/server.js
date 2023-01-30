@@ -12,8 +12,7 @@ app.use("/api", mainRouter);
 
 const { PORT, DB_USERNAME, DB_PASSWORD } = configs
 
-// mongoose.connect(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.ogcbhfp.mongodb.net/?retryWrites=true&w=majority`,
-mongoose.connect(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cibc.kk7z42t.mongodb.net/assignment?retryWrites=true&w=majority`,
+mongoose.connect(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.ogcbhfp.mongodb.net/assignment?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
