@@ -8,12 +8,12 @@ const transactionsSchema = new mongoose.Schema(
   {
     id: { type: mongoose.Schema.Types.Number, required: true },
     date: { type: mongoose.Schema.Types.Long, required: true },
-    sender: { type: SenderSchema, required: false },
-    recipient: { type: RecipientSchema, required: false },
-    Amount: { type: mongoose.Schema.Types.Number, required: false },
-    CurrencyCd: { type: String, required: false },
+    sender: { type: SenderSchema, required: true },
+    recipient: { type: RecipientSchema, required: true },
+    Amount: { type: mongoose.Schema.Types.Number, required: false, default: 0 },
+    CurrencyCd: { type: String, required: false, default: 'CAD' },
     Comments: { type: String, required: true },
-    status: { type: String, required: false },
+    status: { type: String, required: true },
   },
   {
     timestamps: true,
