@@ -6,7 +6,7 @@ mongooseLong(mongoose);
 
 const transactionsSchema = new mongoose.Schema(
   {
-    id: { type: mongoose.Schema.Types.Number, required: true },
+    id: { type: mongoose.Schema.Types.Number, required: true, unique: true },
     date: { type: mongoose.Schema.Types.Long, required: true },
     sender: { type: SenderSchema, required: true },
     recipient: { type: RecipientSchema, required: true },
