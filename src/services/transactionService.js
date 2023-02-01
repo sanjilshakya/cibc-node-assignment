@@ -20,21 +20,13 @@ const transactionService = (() => {
         .select('id date Comments status')
         .sort(sortQuery)
         .skip(skip)
-
-      const mappedTransaction = transactions.map((transaction) => {
-        transaction = transaction.toJSON()
-        transaction.date = +transaction.date
-        return transaction
-      })
-      resolve(mappedTransaction)
+        
+      resolve(transactions)
     })
   }
 
   const getTrasactionById = async (_id) => {
-    let transaction = await Transaction.findById({ _id }).select("id date Comments sender recipient status");
-    transaction = transaction.toJSON();
-    transaction.date = +transaction.date;
-    return transaction;
+    return await Transaction.findById({ _id }).select("id date Comments sender recipient status");
   }
 
   const createTransaction = async (data) => {
