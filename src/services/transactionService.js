@@ -38,8 +38,8 @@ const transactionService = (() => {
   }
 
   const createTransaction = async (data) => {
-    const totalItem = await Transaction.count()
-    data.id = totalItem + 1
+    data.id = await Transaction.count()
+    data.id++
     const newTransaction = new Transaction(data)
     return await newTransaction.save()
   }
